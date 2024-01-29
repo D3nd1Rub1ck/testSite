@@ -51,8 +51,10 @@
     let tg = window.Telegram.WebApp;
     let nText = document.getElementById("nText");
     let nButton = document.getElementById("nButton");
+    
     nButton.addEventListener("click", () => {
-        nText.textContent = "Nothing here.";
+        document.getElementById("nText").textContent = "Nothing here.";
+        alert("Кнопка работает!");
     });
 
     //что то еще 
