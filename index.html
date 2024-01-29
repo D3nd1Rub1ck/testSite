@@ -41,9 +41,20 @@
     <br>
     <button class="button" onclick="sendMessage()">Отправить SMS</button>
     <button class="button" onclick="callNumber()">Позвонить</button>
+    <br>
+    <br>
+    <h4 id="nText">Негры!</h4>
+    <button id="nButton">кабум</button>
 </div>
 
 <script>
+    let tg = window.Telegram.WebApp;
+    let nText = document.getElementById("nText");
+    let nButton = document.getElementById("nButton");
+    nButton.addEventListener("click", () => {
+        nText.textContent = "Nothing here.";
+    });
+
     function sendMessage() {
         var phoneNumber = document.getElementById("phoneNumber").value;
         if (phoneNumber.trim() !== "") {
