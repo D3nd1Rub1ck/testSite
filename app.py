@@ -7,15 +7,18 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     items = []
-    items.append({ 
+    items.append({
+        'productId': 0,
         'price': 100,
         'grade': 5.4
     })
     items.append({ 
+        'productId': 1,
         'price': 234,
         'grade': 6.1
     })
     items.append({ 
+        'productId': 2,
         'price': 234,
         'grade': 6.1
     })

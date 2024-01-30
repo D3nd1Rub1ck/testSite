@@ -16,7 +16,20 @@
     <p>Product description goes here.</p>
     <p>Product grade {{i['grade']}}</p>
     <p>Price: ${{i['price']}}</p>
-    <button>Add to Cart</button>
+    <button id="send_{{i['grade']}}">Add to Cart</button>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+
+        let sendButton = document.getElementById("send_{{i['grade']}}"); 
+
+        sendButton.addEventListener('click', function(){
+            tg.sendData("asdfasdf")
+            alert("message data were send")
+            tg.close();
+        });
+    </script>
+
 </div>
 <hr>
 
