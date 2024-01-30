@@ -10,8 +10,14 @@
 
 {% for i in data %}
 
-<h3> {{i['price']}} </h3>
-<h3> {{i['grade']}} </h3>
+
+<div class="product">
+    <img src="product.jpg" alt="Product Image">
+    <p>Product description goes here.</p>
+    <p>Product grade {{i['grade']}}</p>
+    <p>Price: ${{i['price']}}</p>
+    <button>Add to Cart</button>
+</div>
 <hr>
 
 {% endfor %}
