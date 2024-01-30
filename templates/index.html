@@ -19,7 +19,7 @@
     <button id="send_{{i['productId']}}">Add to Cart</button>
 
     <script>
-        let sendButton = document.getElementById("send_{{i['productId']}}"); 
+        let sendButton{{i['productId']}} = document.getElementById("send_{{i['productId']}}"); 
 
         sendButton.addEventListener('click', function(){
             tg.sendData("Product#{{i['productId']}}")
