@@ -22,10 +22,8 @@
         let sendButton = document.getElementById("send_{{i['productId']}}"); 
 
         sendButton.addEventListener('click', function(){
-            tg.sendData("asdfasdf")
             tg.sendData("Product#{{i['productId']}}")
             alert("message data were send")
-            tg.close();
         });
     </script>
 
