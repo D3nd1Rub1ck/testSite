@@ -4,12 +4,23 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 app = Flask(__name__)
 
+@bot.message_handler(content_types="web_app_data") #получаем отправленные данные 
+def answer(webAppMes):
+   print(webAppMes) #вся информация о сообщении
+   print(webAppMes.web_app_data.data) #конкретно то что мы передали в бота
+   bot.send_message(webAppMes.chat.id, f"получили инофрмацию из веб-приложения: {webAppMes.web_app_data.data}") 
+   #отправляем сообщение в ответ на отправку данных из веб-приложения 
+
 @app.route('/')
 def home():
     items = []
     items.append({ 
         'price': 100,
         'grade': 5.4
+    })
+    items.append({ 
+        'price': 234,
+        'grade': 6.1
     })
     items.append({ 
         'price': 234,
