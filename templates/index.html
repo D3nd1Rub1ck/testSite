@@ -5,31 +5,100 @@
 {% endblock%}
 
 {% block body %}
+<script>
+    var cart = {}
 
-<h1> We have: </h1>
+    function carItemsCounter(cartDict) {
+        var count = 0;
+        for (var key in cartDict) {
+            if (cartDict.hasOwnProperty(key)) {
+                if (cartDict[key].amount > 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+</script>
+<div id="shopDiv">
+    <h1> We have: </h1>
 
-{% for i in data %}
+    {% for i in data %}
+
+    <div class="product">
+        <img src="product.jpg" alt="Product Image">
+        <p>Product description goes here.</p>
+        <p>Product grade {{i['grade']}}</p>
+        <p>Price: ${{i['price']}}</p>
+        <button id="addToCartButton_{{i['productId']}}">Add to Cart</button>
+        <button id="removeFromCartButton_{{i['productId']}}">remove from Cart</button>
+
+        <script>
+
+            cart[{{i['productId']}}] = { "price": {{i['price']}}, "amount": 0 };
+            //console.log(cart);
+
+            let addToCartButton{{i['productId']}} = document.getElementById("addToCartButton_{{i['productId']}}"); 
+
+            addToCartButton{{i['productId']}}.addEventListener('click', function(){
+                cart[{{i['productId']}}]["amount"] += 1;
+                let cartCntText = document.getElementById("cartCnt");
+                cartCntText.textContent = carItemsCounter(cart);
+                //console.log(carItemsCounter(cart));
+                console.log(cart);
+                //tg.sendData("Product#{{i['productId']}}")
+                //alert("message data were send")
+            });
 
 
-<div class="product">
-    <img src="product.jpg" alt="Product Image">
-    <p>Product description goes here.</p>
-    <p>Product grade {{i['grade']}}</p>
-    <p>Price: ${{i['price']}}</p>
-    <button id="send_{{i['productId']}}">Add to Cart</button>
+            let removeFromCartButton_{{i['productId']}} = document.getElementById("removeFromCartButton_{{i['productId']}}"); 
+            removeFromCartButton_{{i['productId']}}.addEventListener('click', function(){
+                if(cart[{{i['productId']}}]["amount"] == 0){
+                    return;
+                }
+                cart[{{i['productId']}}]["amount"] -= 1;
+                let cartCntText = document.getElementById("cartCnt");
+                cartCntText.textContent = carItemsCounter(cart);
+                //console.log(carItemsCounter(cart));
+                console.log(cart);
+                //tg.sendData("Product#{{i['productId']}}")
+                //alert("message data were send")
+            });
+        </script>
 
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+<div id="сartDiv">
+    <div id="cartItemsDiv">
+        <h1>asdf</h1>
+    </div>
+    <h4>In your cart: <b id="cartCnt"> 0 </b> items</h4>
+    <button id="ShowCartButton">View Cart</button>
     <script>
-        let sendButton{{i['productId']}} = document.getElementById("send_{{i['productId']}}"); 
+        let ShowCartButton = document.getElementById("ShowCartButton");
+        document.getElementById("cartItemsDiv").style.display = "none"; 
 
-        sendButton{{i['productId']}}.addEventListener('click', function(){
-            tg.sendData("Product#{{i['productId']}}")
-            alert("message data were send")
+        ShowCartButton.addEventListener('click', function(){
+            let shopDiv = document.getElementById("shopDiv");
+            
+            if (shopDiv.style.display === "none") {
+                shopDiv.style.display = "block";
+            }
+            else if (shopDiv.style.display === "block" || shopDiv.style.display === "") {
+                shopDiv.style.display = "none";
+            }
+            
+            let cartItemsDiv = document.getElementById("cartItemsDiv");
+            if (cartItemsDiv.style.display === "none") {
+                cartItemsDiv.style.display = "block";
+            }
+            else if (cartItemsDiv.style.display === "block" || cartItemsDiv.style.display === "") {
+                cartItemsDiv.style.display = "none";
+            }
+            console.log(cartItemsDiv.style.display);
         });
     </script>
-
 </div>
-<hr>
-
-{% endfor %}
-
 {% endblock %}

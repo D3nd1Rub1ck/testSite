@@ -19,8 +19,13 @@ def home():
     })
     items.append({ 
         'productId': 2,
-        'price': 234,
-        'grade': 6.1
+        'price': 391,
+        'grade': 2.1
+    })
+    items.append({ 
+        'productId': 3,
+        'price': 567,   
+        'grade': 9.1
     })
     return render_template("index.html", data=items)
 

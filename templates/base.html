@@ -23,19 +23,15 @@
         <div class="block"> Banner </div>
         {% block body %}{% endblock %}
     </main>
-    <footer>
-        <button id="testButton">Click me</button>
-    </footer>
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand()
-
-        let testButton = document.getElementById("testButton"); 
-
-        testButton.addEventListener('click', function(){
-            alert("asdfsdafasdf")
-            tg.close()
-        });
-    </script>
 </body>
+    <!--<script>
+    let tg = window.Telegram.WebApp;
+    tg.expand()
+    
+    let testButton = document.getElementById("testButton"); 
+    
+    testButton.addEventListener('click', function(){
+        alert("Good bye WebApp Closing")
+        tg.close()
+    });</script>-->
 </html>
