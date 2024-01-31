@@ -72,7 +72,8 @@
 </div>
 <div id="сartDiv">
     <div id="cartItemsDiv">
-        <h1>asdf</h1>
+        <h3>You have:</h3>
+
     </div>
     <h4>In your cart: <b id="cartCnt"> 0 </b> items</h4>
     <button id="ShowCartButton">View Cart</button>
@@ -91,6 +92,18 @@
             }
             
             let cartItemsDiv = document.getElementById("cartItemsDiv");
+
+            cartItemsDiv.innerHTML = "<h3>You have:</h3>"; // Clear previous content 
+
+            Object.keys(cart).forEach(function(key) {
+                var item = cart[key];
+                if (item.amount >= 1) {
+                    var p = document.createElement("p");
+                    p.textContent = "Price for one: $" + item.price + ", Amount: " + item.amount + ", ProductId: " + key;
+                    cartItemsDiv.appendChild(p);
+                }
+            });
+
             if (cartItemsDiv.style.display === "none") {
                 cartItemsDiv.style.display = "block";
             }
