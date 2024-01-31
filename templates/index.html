@@ -32,7 +32,7 @@
         <p>Price: ${{i['price']}}</p>
         <button id="addToCartButton_{{i['productId']}}">Add to Cart</button>
         <button id="removeFromCartButton_{{i['productId']}}">remove from Cart</button>
-
+        <p>Already in Cart: <b id="cartCount_{{i['productId']}}">0</b></p>
         <script>
 
             cart[{{i['productId']}}] = { "price": {{i['price']}}, "amount": 0 };
@@ -42,6 +42,8 @@
 
             addToCartButton{{i['productId']}}.addEventListener('click', function(){
                 cart[{{i['productId']}}]["amount"] += 1;
+                let cartCount_{{i['productId']}} =  document.getElementById("cartCount_{{i['productId']}}");
+                cartCount_{{i['productId']}}.textContent = cart[{{i['productId']}}]["amount"];
                 let cartCntText = document.getElementById("cartCnt");
                 cartCntText.textContent = carItemsCounter(cart);
                 //console.log(carItemsCounter(cart));
@@ -57,6 +59,8 @@
                     return;
                 }
                 cart[{{i['productId']}}]["amount"] -= 1;
+                let cartCount_{{i['productId']}} =  document.getElementById("cartCount_{{i['productId']}}");
+                cartCount_{{i['productId']}}.textContent = cart[{{i['productId']}}]["amount"];
                 let cartCntText = document.getElementById("cartCnt");
                 cartCntText.textContent = carItemsCounter(cart);
                 //console.log(carItemsCounter(cart));
