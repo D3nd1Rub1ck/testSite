@@ -123,7 +123,37 @@
                 if (item.amount >= 1) {
                     var p = document.createElement("p");
                     p.textContent = "Price for one: $" + item.price + ", Amount: " + item.amount + ", ProductId: " + key;
+                    p.innerHTML = "Price for one: $" + item.price + ", Amount: <span id=\"inCartCnt_" + key + "\">" + item.amount + "</span>, ProductId: " + key;
+                    var addButton = document.createElement("button");
+                    addButton.textContent = "+";
+                    addButton.addEventListener('click', function(){
+                        cart[key]["amount"] += 1;
+                        let cartCount_u =  document.getElementById("cartCount_" + key);
+                        cartCount_u.textContent = cart[key]["amount"];
+                        document.getElementById("inCartCnt_" + key).textContent = cart[key]["amount"];
+                        let cartCntText = document.getElementById("cartCnt");
+                        cartCntText.textContent = cartItemsCounter(cart);
+                        let cartSumText = document.getElementById("cartSum");
+                        cartSumText.textContent = cartSum(cart);
+                    });
+                    var popButton = document.createElement("button");
+                    popButton.textContent = "-";
+                    popButton.addEventListener('click', function(){
+                        if(cart[key]["amount"] == 0){
+                            return;
+                        }
+                        cart[key]["amount"] -= 1;
+                        let cartCount_u =  document.getElementById("cartCount_" + key);
+                        cartCount_u.textContent = cart[key]["amount"];
+                        document.getElementById("inCartCnt_" + key).textContent = cart[key]["amount"];
+                        let cartCntText = document.getElementById("cartCnt");
+                        cartCntText.textContent = cartItemsCounter(cart);
+                        let cartSumText = document.getElementById("cartSum");
+                        cartSumText.textContent = cartSum(cart);
+                    });
                     cartItemsDiv.appendChild(p);
+                    p.appendChild(addButton);
+                    p.appendChild(popButton);
                 }
             });
 
