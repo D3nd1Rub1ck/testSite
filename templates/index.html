@@ -8,7 +8,7 @@
 <script>
     var cart = {}
 
-    function carItemsCounter(cartDict) {
+    function cartItemsCounter(cartDict) {
         var count = 0;
         for (var key in cartDict) {
             if (cartDict.hasOwnProperty(key)) {
@@ -18,6 +18,16 @@
             }
         }
         return count;
+    }
+
+    function cartSum(cartDict) {
+        var res = 0;
+        for (var key in cartDict) {
+            if (cartDict.hasOwnProperty(key)) {
+                res+= cartDict[key].amount * cartDict[key].price;
+            }
+        }
+        return res;
     }
 </script>
 <div id="shopDiv">
@@ -45,8 +55,10 @@
                 let cartCount_{{i['productId']}} =  document.getElementById("cartCount_{{i['productId']}}");
                 cartCount_{{i['productId']}}.textContent = cart[{{i['productId']}}]["amount"];
                 let cartCntText = document.getElementById("cartCnt");
-                cartCntText.textContent = carItemsCounter(cart);
-                //console.log(carItemsCounter(cart));
+                cartCntText.textContent = cartItemsCounter(cart);
+                let cartSumText = document.getElementById("cartSum");
+                cartSumText.textContent = cartSum(cart);
+                //console.log(cartItemsCounter(cart));
                 console.log(cart);
                 //tg.sendData("Product#{{i['productId']}}")
                 //alert("message data were send")
@@ -62,8 +74,10 @@
                 let cartCount_{{i['productId']}} =  document.getElementById("cartCount_{{i['productId']}}");
                 cartCount_{{i['productId']}}.textContent = cart[{{i['productId']}}]["amount"];
                 let cartCntText = document.getElementById("cartCnt");
-                cartCntText.textContent = carItemsCounter(cart);
-                //console.log(carItemsCounter(cart));
+                cartCntText.textContent = cartItemsCounter(cart);
+                let cartSumText = document.getElementById("cartSum");
+                cartSumText.textContent = cartSum(cart);
+                //console.log(cartItemsCounter(cart));
                 console.log(cart);
                 //tg.sendData("Product#{{i['productId']}}")
                 //alert("message data were send")
@@ -79,7 +93,7 @@
         <h3>You have:</h3>
 
     </div>
-    <h4>In your cart: <b id="cartCnt"> 0 </b> items</h4>
+    <h4>In your cart: <b id="cartCnt"> 0 </b> items for total sum of: <b id="cartSum">0</b>.</h4>
     <button id="ShowCartButton">View Cart</button>
     <script>
         let ShowCartButton = document.getElementById("ShowCartButton");
@@ -90,11 +104,14 @@
             
             if (shopDiv.style.display === "none") {
                 shopDiv.style.display = "block";
+                ShowCartButton.textContent = "View Cart";
             }
             else if (shopDiv.style.display === "block" || shopDiv.style.display === "") {
                 shopDiv.style.display = "none";
+                ShowCartButton.textContent = "Back to the shop.";
             }
             
+
             let cartItemsDiv = document.getElementById("cartItemsDiv");
 
             cartItemsDiv.innerHTML = "<h3>You have:</h3>"; // Clear previous content 
@@ -118,4 +135,15 @@
         });
     </script>
 </div>
+<button id="buyButton"> Buy whole cart </button>
+<script> 
+    let buyButton = document.getElementById("buyButton");
+
+    buyButton.addEventListener('click', function(){
+        var jsonCart = JSON.stringify(cart);
+        console.log(jsonCart);
+        alert(jsonCart);
+        tg.sendData(jsonCart);
+    });
+</script>
 {% endblock %}
