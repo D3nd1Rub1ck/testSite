@@ -24,7 +24,9 @@
         var res = 0;
         for (var key in cartDict) {
             if (cartDict.hasOwnProperty(key)) {
-                res+= cartDict[key].amount * cartDict[key].price;
+                if (cartDict[key].amount > 0) {
+                    res += cartDict[key].amount * cartDict[key].price;
+                }
             }
         }
         return res;
