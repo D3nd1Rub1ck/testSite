@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}{% endblock %}
     <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+        let tg = window.Telegram.WebApp;
+        tg.expand()
+    </script>
 </head>
 <body>
     <style>
@@ -24,14 +27,4 @@
         {% block body %}{% endblock %}
     </main>
 </body>
-    <!--<script>
-    let tg = window.Telegram.WebApp;
-    tg.expand()
-    
-    let testButton = document.getElementById("testButton"); 
-    
-    testButton.addEventListener('click', function(){
-        alert("Good bye WebApp Closing")
-        tg.close()
-    });</script>-->
 </html>
